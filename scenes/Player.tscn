@@ -34,13 +34,18 @@ shape = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.870432, 0 )
 script = ExtResource( 2 )
 
-[node name="Camera" type="Camera" parent="CameraHolder"]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.6, 0, -5 )
+[node name="SpringArm" type="SpringArm" parent="CameraHolder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, -0.6, 0, 0 )
+spring_length = 5.0
+margin = 0.5
+
+[node name="Camera" type="Camera" parent="CameraHolder/SpringArm"]
+transform = Transform( -1, -8.74228e-08, -3.89414e-07, -8.74228e-08, 1, 0, -3.89414e-07, -3.40437e-14, 1, 0, 0, 5 )
 current = true
 fov = 40.0
 far = 350.0
 
-[node name="TextureRect" type="TextureRect" parent="CameraHolder/Camera"]
+[node name="TextureRect" type="TextureRect" parent="CameraHolder/SpringArm/Camera"]
 modulate = Color( 1, 1, 1, 0.588235 )
 margin_left = 960.0
 margin_top = 540.0
@@ -48,11 +53,12 @@ margin_right = 1060.0
 margin_bottom = 640.0
 rect_scale = Vector2( 0.421938, 0.435381 )
 texture = ExtResource( 3 )
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RayCast" type="RayCast" parent="CameraHolder/Camera"]
+[node name="RayCast" type="RayCast" parent="CameraHolder/SpringArm/Camera"]
 enabled = true
-cast_to = Vector3( 0, 0, -20 )
+cast_to = Vector3( 0, 0, -25 )
 script = ExtResource( 4 )
