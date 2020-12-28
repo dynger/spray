@@ -9,11 +9,11 @@
 
 [sub_resource type="CubeMesh" id=2]
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="BoxShape" id=3]
 
-[sub_resource type="CubeMesh" id=5]
+[sub_resource type="CubeMesh" id=4]
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=5]
 albedo_texture = ExtResource( 4 )
 roughness_texture = ExtResource( 6 )
 normal_enabled = true
@@ -49,8 +49,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.30738, 0 )
 
 [node name="floor_collision_shape" type="CollisionShape" parent="floor_static_body"]
 transform = Transform( 47.7369, 0, 0, 0, 1, 0, 0, 0, 43.7246, 0, 0, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="floor_mesh_instance" type="MeshInstance" parent="floor_static_body/floor_collision_shape"]
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
