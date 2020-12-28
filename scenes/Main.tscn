@@ -29,12 +29,21 @@ visible = false
 texture = ExtResource( 3 )
 
 [node name="cube_static_body" type="StaticBody" parent="."]
+collision_layer = 3
 
 [node name="cube_collision_shape" type="CollisionShape" parent="cube_static_body"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.791667, 6.19397 )
+transform = Transform( -0.815483, 0, 0, 0, 2.57963, 0, 0, 0, 6.41883, -2.8282, 2.3866, 0 )
 shape = SubResource( 1 )
 
 [node name="cube_mesh_instance" type="MeshInstance" parent="cube_static_body/cube_collision_shape"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="cube_collision_shape2" type="CollisionShape" parent="cube_static_body"]
+transform = Transform( -0.815483, 0, 0, 0, 2.57963, 0, 0, 0, 6.41883, 4.50051, 2.3866, 0 )
+shape = SubResource( 1 )
+
+[node name="cube_mesh_instance" type="MeshInstance" parent="cube_static_body/cube_collision_shape2"]
 mesh = SubResource( 2 )
 material/0 = null
 

@@ -1,7 +1,5 @@
 extends RayCast
 
-var ray_length = 20
-
 #signal sprayed(position, normal)
 
 func _physics_process(delta):
@@ -17,14 +15,8 @@ func _physics_process(delta):
 
 func _on_sprayed(collider, position, normal):
 	var tag = Sprite3D.new()
-	tag.transform.origin = position
-#	tag.rotation.z = -90
-#	print(tag.transform.origin)
 	tag.texture = load("res://textures/sprayblume.png")
-#	tag.global_transform.basis.z = normal
-#	tag.transform.basis.rotate_x(normal.x * PI/2)
-#	tag.transform.basis.rotate_y(normal.y * PI/2)
-#	tag.transform.basis.rotate_z(normal.z * PI/2)
-	tag.transform.basis = Basis(-normal, PI) * tag.transform.basis
-#	tag.set_rotation(normal)
+	tag.transform.origin = position
+	var normal_correct_rotation = Vector3(normal.y, normal.x, normal.z)
+	tag.transform.basis = transform.basis.rotated(normal_correct_rotation, PI/2)
 	collider.add_child(tag)
