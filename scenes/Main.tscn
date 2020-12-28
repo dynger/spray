@@ -31,7 +31,7 @@ texture = ExtResource( 3 )
 [node name="cube_static_body" type="StaticBody" parent="."]
 
 [node name="cube_collision_shape" type="CollisionShape" parent="cube_static_body"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.49313, 6.19397 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.791667, 6.19397 )
 shape = SubResource( 1 )
 
 [node name="cube_mesh_instance" type="MeshInstance" parent="cube_static_body/cube_collision_shape"]
