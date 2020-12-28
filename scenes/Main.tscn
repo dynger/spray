@@ -1,37 +1,52 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://scenes/Tag.tscn" type="PackedScene" id=1]
-[ext_resource path="res://SprayPreset.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://textures/sprayblume.png" type="Texture" id=3]
-[ext_resource path="res://scenes/RaycastCallback.gd" type="Script" id=4]
+[ext_resource path="res://textures/beton3/concrete_panel_03_diffuse.png" type="Texture" id=4]
+[ext_resource path="res://textures/beton3/concrete_panel_03_normal.png" type="Texture" id=5]
+[ext_resource path="res://textures/beton3/concrete_panel_03_glossiness.png" type="Texture" id=6]
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=1]
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 4 )
+roughness_texture = ExtResource( 6 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 5 )
+uv1_scale = Vector3( 10, 10, 10 )
 
 [node name="Spatial" type="Spatial"]
-script = ExtResource( 2 )
-
-[node name="MeshInstance" parent="." instance=ExtResource( 1 )]
-visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 visible = false
 texture = ExtResource( 3 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( -0.562747, 0.570133, -0.598552, -2.24735e-07, 0.724088, 0.689708, 0.826629, 0.388131, -0.407478, -4.94908, 3.52496, -3.90842 )
-fov = 38.0
-far = 400.0
+[node name="cube_static_body" type="StaticBody" parent="."]
 
-[node name="RayCast" type="RayCast" parent="Camera"]
+[node name="cube_collision_shape" type="CollisionShape" parent="cube_static_body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.49313, 6.19397 )
+shape = SubResource( 1 )
 
-[node name="StaticBody" type="StaticBody" parent="."]
-script = ExtResource( 4 )
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 2 )
-
-[node name="Cube" type="MeshInstance" parent="StaticBody/CollisionShape"]
-mesh = SubResource( 1 )
+[node name="cube_mesh_instance" type="MeshInstance" parent="cube_static_body/cube_collision_shape"]
+mesh = SubResource( 2 )
 material/0 = null
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.30738, 0 )
+
+[node name="floor_static_body" type="StaticBody" parent="."]
+
+[node name="floor_collision_shape" type="CollisionShape" parent="floor_static_body"]
+transform = Transform( 47.7369, 0, 0, 0, 1, 0, 0, 0, 43.7246, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="floor_mesh_instance" type="MeshInstance" parent="floor_static_body/floor_collision_shape"]
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )

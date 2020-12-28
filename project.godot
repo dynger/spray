@@ -19,6 +19,12 @@ config/name="Spray"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+mouse_cursor/custom_image="res://textures/crosshair.png"
+
 [input]
 
 mouse_left={
@@ -29,4 +35,7 @@ mouse_left={
 
 [rendering]
 
+quality/filters/anisotropic_filter_level=8
+quality/shadows/filter_mode=2
+quality/filters/msaa=3
 environment/default_environment="res://default_env.tres"

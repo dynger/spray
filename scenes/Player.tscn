@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Camera.gd" type="Script" id=2]
 [ext_resource path="res://textures/crosshair.png" type="Texture" id=3]
+[ext_resource path="res://scripts/SprayCast.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleMesh" id=1]
 
@@ -49,3 +50,8 @@ texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SprayCast" type="RayCast" parent="CameraHolder/Camera"]
+enabled = true
+cast_to = Vector3( 0, 0, -20 )
+script = ExtResource( 4 )

@@ -9,11 +9,11 @@ var mouseDelta : Vector2 = Vector2()
 onready var player = get_parent()
 
 func _ready():
-	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+#	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Input.warp_mouse_position(Vector2(960,540))
 
 func _input(event):
-	
 	if event is InputEventMouseMotion:
 		mouseDelta = event.relative
 
