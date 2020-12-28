@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://textures/sprayblume.png" type="Texture" id=3]
@@ -9,6 +9,17 @@
 [sub_resource type="BoxShape" id=1]
 
 [sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=6]
+params_use_alpha_scissor = true
+params_alpha_scissor_threshold = 0.98
+albedo_color = Color( 0, 0, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 1, 1, 1 )
+emission_energy = 50.0
+emission_operator = 0
+emission_on_uv2 = false
+emission_texture = ExtResource( 3 )
 
 [sub_resource type="BoxShape" id=3]
 
@@ -39,6 +50,11 @@ shape = SubResource( 1 )
 mesh = SubResource( 2 )
 material/0 = null
 
+[node name="Sprite3D" type="Sprite3D" parent="cube_static_body/cube_collision_shape/cube_mesh_instance"]
+transform = Transform( 1, 0, 0, 0, 0.303631, 0, 0, 0, 1, -2.2513, 0, 0 )
+material_override = SubResource( 6 )
+alpha_cut = 2
+
 [node name="cube_collision_shape2" type="CollisionShape" parent="cube_static_body"]
 transform = Transform( -0.815483, 0, 0, 0, 2.57963, 0, 0, 0, 6.41883, 4.50051, 2.3866, 0 )
 shape = SubResource( 1 )
@@ -57,5 +73,6 @@ transform = Transform( 47.7369, 0, 0, 0, 1, 0, 0, 0, 43.7246, 0, 0, 0 )
 shape = SubResource( 3 )
 
 [node name="floor_mesh_instance" type="MeshInstance" parent="floor_static_body/floor_collision_shape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 4 )
 material/0 = SubResource( 5 )
