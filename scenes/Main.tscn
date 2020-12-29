@@ -39,7 +39,6 @@ transform = Transform( -0.815483, 0, 0, 0, 2.57963, 0, 0, 0, 6.41883, -2.8282, 2
 shape = SubResource( 1 )
 
 [node name="cube_mesh_instance" type="MeshInstance" parent="cube_static_body/cube_collision_shape"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = null
 
