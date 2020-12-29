@@ -8,11 +8,11 @@ func _physics_process(delta):
 		var normal = get_collision_normal()
 		_on_sprayed(collider, global_position, normal)
 
-func _on_sprayed(object, collision_position, collider_normal):
+func _on_sprayed(collision_object, collision_position, collider_normal):
 	var tag = Sprite3D.new()
-	object.add_child(tag)
+	collision_object.add_child(tag)
 	rotate_spray_to_collider_normal(tag, collider_normal)
-	apply_spray_at_position(tag, object, collision_position, collider_normal)
+	apply_spray_at_position(tag, collision_object, collision_position, collider_normal)
 	tag.texture = load("res://textures/sprayblume.png")
 	
 func rotate_spray_to_collider_normal(tag, collider_normal):
