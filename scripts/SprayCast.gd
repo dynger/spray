@@ -10,6 +10,7 @@ func _physics_process(delta):
 
 func _on_sprayed(collision_object, collision_position, collider_normal):
 	var tag = Sprite3D.new()
+	tag.double_sided = false
 	collision_object.add_child(tag)
 	rotate_spray_to_collider_normal(tag, collider_normal)
 	apply_spray_at_position(tag, collision_object, collision_position, collider_normal)
