@@ -1,7 +1,7 @@
 extends KinematicBody
 
-var moveSpeed : float = 3.0
-var jumpForce : float = 5.0
+var moveSpeed : float = 50.0
+var jumpForce : float = 100.0
 var gravity : float = 15.0
 
 var vel : Vector3 = Vector3()

@@ -43,7 +43,7 @@ margin = 0.5
 transform = Transform( -1, -8.74228e-08, -3.89414e-07, -8.74228e-08, 1, 0, -3.89414e-07, -3.40437e-14, 1, 0, 0, 5 )
 current = true
 fov = 40.0
-far = 350.0
+far = 8000.0
 
 [node name="TextureRect" type="TextureRect" parent="CameraHolder/SpringArm/Camera"]
 modulate = Color( 1, 1, 1, 0.588235 )
