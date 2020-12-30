@@ -19,7 +19,6 @@ func _on_sprayed(collision_object, collision_position, collider_normal):
 func create_tag(collision_object):
 	var tag = Sprite3D.new()
 	collision_object.add_child(tag)
-#	tag.double_sided = false
 	tag.texture = texture
 	return tag
 
