@@ -3,7 +3,7 @@ extends RayCast
 onready var texture = load("res://textures/sprayblume.png")
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("mouse_left") and is_colliding():
+	if Input.is_action_pressed("mouse_left") and is_colliding():
 		var collider = get_collider()
 		print(collider.get_name())
 		var global_position = get_collision_point()

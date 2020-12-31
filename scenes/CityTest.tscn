@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://models/stadtplan.dae" type="PackedScene" id=2]
+[ext_resource path="res://models/city-buildings.dae" type="PackedScene" id=3]
 
 [node name="City" type="Spatial"]
 
@@ -10,3 +11,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44086, -2.46743, -5.8204 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 474.612, 76.4939, 99.0524 )
+
+[node name="city-buildings" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.25, 0 )
