@@ -1,6 +1,6 @@
-extends RayCast
+extends "res://scripts/SprayCast.gd"
 
-class_name SprayCast
+class_name CoalescingSprayCast
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("spray_stencil") and is_colliding():
@@ -41,14 +41,10 @@ func apply_spray_texture(tag):
 func get_selected_spray():
 	return load("res://textures/sprayblume.png")
 
-func luminescent_material():
-	pass
-	#var tag_material = SpatialMaterial.new()
-#	tag_material.emission_enabled = true
-#	tag_material.flags_transparent = true
-	#tag_material.emission = Color(255,255,255,255)
+func collect_existing_sprays_on_same_surface(collision_object, collision_position, collider_normal):
+	var result = []
+	for existing_spray in collision_object.get_children():
+		if existing_spray is SprayStencil:
+			result.append(existing_spray)
 	
-	#tag_material.emission_texture = load("res://textures/sprayblume.png")
-	#tag_material.albedo_color = Color(255,255,255,255)
-	#tag_material.albedo_texture = load("res://textures/sprayblume.png")
-	#tag.material_override = tag_material
+	return result

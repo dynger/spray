@@ -8,9 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "RayCast",
+"class": "CoalescingSprayCast",
+"language": "GDScript",
+"path": "res://scripts/CoalescingSprayCast.gd"
+}, {
+"base": "RayCast",
+"class": "SprayCast",
+"language": "GDScript",
+"path": "res://scripts/SprayCast.gd"
+}, {
+"base": "Sprite3D",
+"class": "SprayStencil",
+"language": "GDScript",
+"path": "res://scripts/SprayStencil.gd"
+} ]
 _global_script_class_icons={
-
+"CoalescingSprayCast": "",
+"SprayCast": "",
+"SprayStencil": ""
 }
 
 [application]
@@ -58,6 +75,11 @@ mouse_left={
 Jump={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+spray_stencil={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

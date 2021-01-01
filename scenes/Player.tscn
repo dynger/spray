@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Camera.gd" type="Script" id=2]
 [ext_resource path="res://textures/crosshair.png" type="Texture" id=3]
 [ext_resource path="res://scripts/SprayCast.gd" type="Script" id=4]
+[ext_resource path="res://scripts/CoalescingSprayCast.gd" type="Script" id=5]
 
 [sub_resource type="CapsuleMesh" id=1]
 
@@ -15,6 +16,8 @@
 input_ray_pickable = false
 collision_layer = 2
 script = ExtResource( 1 )
+moveSpeed = 5.0
+jumpForce = 5.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, -8.14603e-08, -0.8, 0, 0.5, -1.30337e-07, 0, 0, 0 )
@@ -45,6 +48,11 @@ current = true
 fov = 40.0
 far = 8000.0
 
+[node name="SprayCast" type="RayCast" parent="CameraHolder/SpringArm/Camera"]
+transform = Transform( 1, 1.32571e-20, 0, 1.32571e-20, 1, 0, 0, 0, 1, 0, 0, 0 )
+cast_to = Vector3( 0, 0, -25 )
+script = ExtResource( 4 )
+
 [node name="TextureRect" type="TextureRect" parent="CameraHolder/SpringArm/Camera"]
 modulate = Color( 1, 1, 1, 0.588235 )
 margin_left = 960.0
@@ -61,4 +69,4 @@ __meta__ = {
 [node name="RayCast" type="RayCast" parent="CameraHolder/SpringArm/Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -25 )
-script = ExtResource( 4 )
+script = ExtResource( 5 )
