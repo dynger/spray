@@ -1,6 +1,6 @@
 extends "res://scripts/SprayCast.gd"
 
-class_name CoalescingSprayCast
+class_name MergingSprayCast
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("spray_stencil") and is_colliding():
