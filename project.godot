@@ -42,6 +42,10 @@ config/name="Spray"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+MathUtils="*res://scripts/MathUtils.gd"
+
 [display]
 
 window/size/width=1920

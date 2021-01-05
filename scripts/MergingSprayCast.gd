@@ -1,6 +1,8 @@
-extends "res://scripts/SprayCast.gd"
+extends RayCast
 
 class_name MergingSprayCast
+
+var texture_merge = TextureMerge.new()
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("spray_stencil") and is_colliding():
@@ -10,25 +12,25 @@ func _physics_process(delta):
 		_on_sprayed(collider, global_position, normal)
 
 func _on_sprayed(collision_object, collision_position, collider_normal):
-	var tag = create_tag(collision_object)
+	var tag = create_tag(collision_object, collider_normal)
 	rotate_spray_to_collider_normal(tag, collider_normal)
 	apply_spray_at_position(tag, collision_object, collision_position, collider_normal)
 	apply_spray_texture(tag)
+	print("drew stencil")
+	var stencils = collect_existing_sprays_on_same_surface(collision_object, collision_position, collider_normal)
+	print("collected %s stencils on same object" % stencils.size())
+	texture_merge.merge_stencils(stencils)
 	
-func create_tag(collision_object):
+func create_tag(collision_object, collider_normal):
 	var tag = SprayStencil.new()
+	tag.collider_normal = collider_normal
 	collision_object.add_child(tag)
 	return tag
 
 func rotate_spray_to_collider_normal(tag, collider_normal):
-	var axis = tag.front.cross(collider_normal)
-	axis = axis.normalized()
-
-	var cosa = tag.front.dot(collider_normal)
-	var angle = acos(cosa)
-	
-	var rotated_global_transform = tag.transform.rotated(axis, angle)
-	tag.set_global_transform(rotated_global_transform) 
+	var front = tag.transform.basis.z
+	var rotated_global_transform = MathUtils.rotate_to_normal(tag.transform, front, collider_normal)
+	tag.set_global_transform(rotated_global_transform)
 
 func apply_spray_at_position(tag, collision_object, collision_position, collider_normal):
 	var local_position = collision_object.to_local(collision_position)
@@ -44,7 +46,8 @@ func get_selected_spray():
 func collect_existing_sprays_on_same_surface(collision_object, collision_position, collider_normal):
 	var result = []
 	for existing_spray in collision_object.get_children():
-		if existing_spray is SprayStencil:
+		# TODO: collect only those which lie on the same face!
+		if existing_spray is SprayStencil and existing_spray.collider_normal == collider_normal:
 			result.append(existing_spray)
 	
 	return result
