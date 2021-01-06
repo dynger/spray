@@ -6,33 +6,37 @@ var texture_merge = TextureMerge.new()
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("spray_stencil") and is_colliding():
-		var collider = get_collider()
-		var global_position = get_collision_point()
-		var normal = get_collision_normal()
-		_on_sprayed(collider, global_position, normal)
+		_on_sprayed()
 
-func _on_sprayed(collision_object, collision_position, collider_normal):
-	var tag = create_tag(collision_object, collider_normal)
-	rotate_spray_to_collider_normal(tag, collider_normal)
-	apply_spray_at_position(tag, collision_object, collision_position, collider_normal)
+func _on_sprayed():
+	draw_stencil()
+	merge_stencils()
+
+func draw_stencil():
+	var tag = create_tag()
+	rotate_spray_to_collider_normal(tag)
+	apply_spray_at_position(tag)
 	apply_spray_texture(tag)
 	print("drew stencil")
-	var stencils = collect_existing_sprays_on_same_surface(collision_object, collision_position, collider_normal)
-	print("collected %s stencils on same object" % stencils.size())
-	texture_merge.merge_stencils(stencils)
-	
-func create_tag(collision_object, collider_normal):
+
+func create_tag():
 	var tag = SprayStencil.new()
-	tag.collider_normal = collider_normal
+	tag.collider_normal = get_collision_normal()
+	var collision_object = get_collider()
 	collision_object.add_child(tag)
 	return tag
 
-func rotate_spray_to_collider_normal(tag, collider_normal):
+func rotate_spray_to_collider_normal(tag):
 	var front = tag.transform.basis.z
-	var rotated_global_transform = MathUtils.rotate_to_normal(tag.transform, front, collider_normal)
+	var collider_normal = get_collision_normal()
+	var rotated_global_transform = MathUtils.rotate_to_normal(
+		tag.transform, front, collider_normal)
 	tag.set_global_transform(rotated_global_transform)
 
-func apply_spray_at_position(tag, collision_object, collision_position, collider_normal):
+func apply_spray_at_position(tag):
+	var collision_object = get_collider()
+	var collision_position = get_collision_point()
+	var collider_normal = get_collision_normal()
 	var local_position = collision_object.to_local(collision_position)
 	var normalized_normal = collider_normal.normalized()
 	tag.transform.origin = local_position + (normalized_normal * 0.001)
@@ -43,8 +47,16 @@ func apply_spray_texture(tag):
 func get_selected_spray():
 	return load("res://textures/sprayblume.png")
 
-func collect_existing_sprays_on_same_surface(collision_object, collision_position, collider_normal):
+func merge_stencils():
+	var stencils = collect_existing_sprays_on_same_surface()
+	print("collected %s stencils on same object" % stencils.size())
+	texture_merge.merge_stencils(stencils)
+
+func collect_existing_sprays_on_same_surface():
 	var result = []
+	var collision_object = get_collider()
+	var collider_normal = get_collision_normal()
+	
 	for existing_spray in collision_object.get_children():
 		# TODO: collect only those which lie on the same face!
 		if existing_spray is SprayStencil and existing_spray.collider_normal == collider_normal:

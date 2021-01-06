@@ -96,7 +96,7 @@ func draw_image(combined_size:Rect2, stencils:Array):
 		var origin = stencil.transform.origin
 		var origin2d = Vector2(origin.x, origin.y)
 		print("processing image at origin (%s, %s)" % [origin2d.x, origin2d.y])
-		#builder.append(image, origin2d)
+		builder.append(image, origin2d)
 	
 	return builder.get_result()
 
@@ -111,13 +111,19 @@ class ImageBuilder:
 	
 	func append(image:Image, origin:Vector2):
 		print("append image")
+		image.decompress()
 		result.lock()
 		image.lock()
-		for x in range(0, image.get_width()-1, 1):
-			for y in range(0, image.get_height()-1, 1):
-				print("set pixel (%s, %s)" % [x, y])
-				var pixel = image.get_pixel(x, y)
-				result.set_pixel(x, y, pixel)
+		print("image width, height (%s, %s)" % [image.get_width(), image.get_height()])
+		var height = image.get_height()
+		var width = image.get_width()
+		for y in range(height):
+			print("set pixel (%s)" % [y])
+			for x in range(width):
+				print("set pixel (%s, %s):" % [x, y])
+#				var pixel = image.get_pixel(x, y)
+#				print("set pixel (%s, %s): %s" % [x, y, pixel])
+#				result.set_pixel(x, y, pixel)
 		image.unlock()
 		result.unlock()
 
