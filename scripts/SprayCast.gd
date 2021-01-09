@@ -42,4 +42,4 @@ func apply_spray_texture(tag):
 	tag.texture = get_selected_spray()
 
 func get_selected_spray():
-	return load("res://textures/sprayblume.png")
+	return load("res://textures/stencils/sprayblume.png")

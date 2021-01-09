@@ -6,7 +6,7 @@ var texture_merge = TextureMerge.new()
 
 func _on_sprayed():
 	draw_stencil()
-	merge_stencils()
+	#merge_stencils()
 
 func merge_stencils():
 	var stencils = collect_existing_sprays_on_same_surface()
