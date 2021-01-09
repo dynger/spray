@@ -19,7 +19,8 @@ func merge_stencils(stencils:Array):
 	print("merging %s stencils on same object" % stencils.size())
 	
 	var original_parent = stencils[0].get_parent()
-	var rotation_helper = duplicate_stencils(stencils)
+	var rotation_helper = create_rotation_helper(original_parent)
+	duplicate_stencils(stencils, rotation_helper)
 	rotate_normal_to_global_x(rotation_helper)
 	var combined_size = calculate_combined_size(rotation_helper)
 	var combined_image = draw_image(combined_size, rotation_helper)
@@ -52,22 +53,20 @@ func have_same_pixel_size(stencils:Array):
 			return false
 	return true
 
-func duplicate_stencils(stencils:Array):
-	var original_parent = stencils[0].get_parent()
-	var rotation_helper = create_rotation_helper(original_parent)
-	
-	for stencil in stencils:
-		var copy = stencil.duplicate()
-		original_parent.remove_child(copy)
-		rotation_helper.add_child(copy)
-	return rotation_helper
-
 func create_rotation_helper(original_parent):
 	var rotation_helper = Spatial.new()
 	var root = original_parent.get_parent()
 	root.add_child(rotation_helper)
 	rotation_helper.transform = original_parent.transform
 	return rotation_helper
+
+func duplicate_stencils(stencils:Array, rotation_helper):
+	var original_parent = stencils[0].get_parent()
+	
+	for stencil in stencils:
+		var copy = stencil.duplicate()
+		original_parent.remove_child(copy)
+		rotation_helper.add_child(copy)
 
 # This requires the stencils be direct children of the game object
 # (house, NPC,...) they're drawn onto.
@@ -88,6 +87,7 @@ func calculate_combined_size(rotation_helper):
 	var max_x = MathUtils.MIN_INT
 	var max_y = MathUtils.MIN_INT
 	var pixel_size
+	var combined_image = CombinedImageSpec.new()
 	
 	for stencil in rotation_helper.get_children():
 		pixel_size = stencil.get_pixel_size()
@@ -123,7 +123,29 @@ func image_size_world(sprite):
 	var world_x = used_rect.size.x * pixel_size
 	var world_y = used_rect.size.y * pixel_size
 	return Rect2(used_rect.position, Vector2(world_x, world_y))
+
+class ImageSpec:
+	func get_size_world(): pass
+	func get_size_pixel(): pass
+	func get_origin_world(): pass
+	func get_origin_pixel(): pass
+
+class CombinedImageSpec extends ImageSpec:
+	var pixel_size: float
+	var images: Array
+#	var size_world: Vector2
+#	var size_pixel: Vector2
 	
+#	func add_stencil(stencil:SprayStencil):
+		
+	
+class PartImageSpec extends ImageSpec:
+	var image: Image
+	var origin_world: float
+	var origin_pixel: int
+	var size_world: Vector2
+	var size_pixel: Vector2
+
 func draw_image(combined_size:Rect2, rotation_helper):
 	var pixel_size = rotation_helper.get_child(0).get_pixel_size()
 	var builder = ImageBuilder.new(combined_size.size, pixel_size)

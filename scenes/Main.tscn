@@ -38,9 +38,10 @@ data = PoolVector3Array( -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, -1, -1, -1, 1, -1, 
 [node name="Spatial" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.30738, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56282, -0.31934, -17.5306 )
 
 [node name="floor_static_body" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.62672, 0 )
 
 [node name="floor_collision_shape" type="CollisionShape" parent="floor_static_body"]
 transform = Transform( 47.7369, 0, 0, 0, 1, 0, 0, 0, 43.7246, 0, 0, 0 )
@@ -51,7 +52,7 @@ mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
 [node name="StaticBody4" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.51524, 4.03869, 10.1923 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.51524, 1.41197, 10.1923 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody4"]
 mesh = SubResource( 4 )
@@ -61,7 +62,7 @@ material/0 = null
 shape = SubResource( 5 )
 
 [node name="StaticBody5" type="StaticBody" parent="."]
-transform = Transform( 0.790638, 0.540643, -0.287395, -0.356356, 0.788011, 0.502044, 0.497898, -0.29452, 0.815693, 2.70595, 4.03869, 10.1923 )
+transform = Transform( 0.790638, 0.540643, -0.287395, -0.356356, 0.788011, 0.502044, 0.497898, -0.29452, 0.815693, 2.70595, 1.41197, 10.1923 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody5"]
 mesh = SubResource( 4 )
@@ -71,11 +72,11 @@ material/0 = null
 shape = SubResource( 5 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.83193, 2.73472, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.83193, 0.108001, 0 )
 texture = ExtResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.60749, 3.21218, 7.59801 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.60749, 0.58546, 7.59801 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
 mesh = ExtResource( 2 )
@@ -85,7 +86,7 @@ material/0 = SubResource( 6 )
 shape = SubResource( 7 )
 
 [node name="StaticBody3" type="StaticBody" parent="."]
-transform = Transform( 0.973176, 0.119294, -0.196715, -0.0453191, 0.937708, 0.344456, 0.225553, -0.326302, 0.917961, -13.8711, 3.13006, -9.53434 )
+transform = Transform( 0.973176, 0.119294, -0.196715, -0.0453191, 0.937708, 0.344456, 0.225553, -0.326302, 0.917961, -13.8711, 0.503338, -9.53434 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody3"]
 transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 1.49012e-08, 5.96046e-08, 1, 0, 0, 0 )
@@ -96,7 +97,7 @@ material/0 = SubResource( 6 )
 shape = SubResource( 7 )
 
 [node name="StaticBody2" type="StaticBody" parent="."]
-transform = Transform( 0.779589, 0.535545, -0.324704, -0.408299, 0.827731, 0.384908, 0.474903, -0.167493, 0.863952, 4.28756, 2.99575, 5.60627 )
+transform = Transform( 0.779589, 0.535545, -0.324704, -0.408299, 0.827731, 0.384908, 0.474903, -0.167493, 0.863952, 4.28756, 0.36903, 5.60627 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
 mesh = ExtResource( 7 )
