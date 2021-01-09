@@ -9,10 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "RayCast",
+"base": "SprayCast",
 "class": "MergingSprayCast",
 "language": "GDScript",
 "path": "res://scripts/MergingSprayCast.gd"
+}, {
+"base": "Reference",
+"class": "RecentSprays",
+"language": "GDScript",
+"path": "res://scripts/RecentSprays.gd"
 }, {
 "base": "RayCast",
 "class": "SprayCast",
@@ -31,6 +36,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "MergingSprayCast": "",
+"RecentSprays": "",
 "SprayCast": "",
 "SprayStencil": "",
 "TextureMerge": ""

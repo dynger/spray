@@ -4,33 +4,36 @@ class_name SprayCast
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("spray_stencil") and is_colliding():
-		var collider = get_collider()
-		var global_position = get_collision_point()
-		var normal = get_collision_normal()
-		_on_sprayed(collider, global_position, normal)
+		_on_sprayed()
 
-func _on_sprayed(collision_object, collision_position, collider_normal):
-	var tag = create_tag(collision_object)
-	rotate_spray_to_collider_normal(tag, collider_normal)
-	apply_spray_at_position(tag, collision_object, collision_position, collider_normal)
+func _on_sprayed():
+	draw_stencil()
+
+func draw_stencil():
+	var tag = create_tag()
+	rotate_spray_to_collider_normal(tag)
+	apply_spray_at_position(tag)
 	apply_spray_texture(tag)
-	
-func create_tag(collision_object):
+	print("drew stencil")
+
+func create_tag():
 	var tag = SprayStencil.new()
+	tag.collider_normal = get_collision_normal()
+	var collision_object = get_collider()
 	collision_object.add_child(tag)
 	return tag
 
-func rotate_spray_to_collider_normal(tag, collider_normal):
-	var axis = tag.front.cross(collider_normal)
-	axis = axis.normalized()
+func rotate_spray_to_collider_normal(tag):
+	var front = tag.transform.basis.z
+	var collider_normal = get_collision_normal()
+	var rotated_global_transform = MathUtils.rotate_to_normal(
+		tag.transform, front, collider_normal)
+	tag.set_global_transform(rotated_global_transform)
 
-	var cosa = tag.front.dot(collider_normal)
-	var angle = acos(cosa)
-	
-	var rotated_global_transform = tag.transform.rotated(axis, angle)
-	tag.set_global_transform(rotated_global_transform) 
-
-func apply_spray_at_position(tag, collision_object, collision_position, collider_normal):
+func apply_spray_at_position(tag):
+	var collision_object = get_collider()
+	var collision_position = get_collision_point()
+	var collider_normal = get_collision_normal()
 	var local_position = collision_object.to_local(collision_position)
 	var normalized_normal = collider_normal.normalized()
 	tag.transform.origin = local_position + (normalized_normal * 0.001)
@@ -40,15 +43,3 @@ func apply_spray_texture(tag):
 
 func get_selected_spray():
 	return load("res://textures/sprayblume.png")
-
-func luminescent_material():
-	pass
-	#var tag_material = SpatialMaterial.new()
-#	tag_material.emission_enabled = true
-#	tag_material.flags_transparent = true
-	#tag_material.emission = Color(255,255,255,255)
-	
-	#tag_material.emission_texture = load("res://textures/sprayblume.png")
-	#tag_material.albedo_color = Color(255,255,255,255)
-	#tag_material.albedo_texture = load("res://textures/sprayblume.png")
-	#tag.material_override = tag_material
