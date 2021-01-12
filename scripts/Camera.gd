@@ -19,12 +19,12 @@ func _input(event):
 func _process(delta):
 
 	var rot = Vector3(mouseDelta.y, mouseDelta.x, 0) * lookSensitivity * delta
-	
+
 	rotation_degrees.x += rot.x
 	rotation_degrees.x = clamp(rotation_degrees.x, minAngle, maxAngle)
-	
+
 	player.rotation_degrees.y -= rot.y
-	
+
 	mouseDelta = Vector2()
-	
-	
+
+

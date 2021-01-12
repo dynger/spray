@@ -2,7 +2,7 @@ extends RayCast
 
 class_name SprayCast
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("spray_stencil") and is_colliding():
 		_on_sprayed()
 
